@@ -1,0 +1,318 @@
+/* Thème sombre global */
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container principal centré */
+.main-container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Navigation corrigée */
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-menu li {
+    margin: 0;
+}
+
+.nav-menu a {
+    color: #4a9eff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 1px solid #4a9eff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.nav-menu a:hover {
+    background-color: #4a9eff;
+    color: #1a1a1a;
+}
+
+/* Titres */
+h1 {
+    color: #ffffff;
+    font-size: 2.5em;
+    margin: 30px 0;
+}
+
+h2 {
+    color: #cccccc;
+    font-size: 1.8em;
+    margin: 25px 0 15px 0;
+}
+
+/* Section des jeux */
+.games-section {
+    margin: 40px 0;
+}
+
+/* Grille des jeux */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+/* Chaque item de jeu */
+.game-item {
+    border: 2px solid #333;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #2a2a2a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover sur chaque jeu individuellement */
+.game-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(74, 158, 255, 0.4);
+    border-color: #4a9eff;
+}
+
+.game-item a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.game-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.game-item:hover img {
+    transform: scale(1.1);
+}
+
+.game-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0e0e0;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.game-item:hover .game-title {
+    color: #4a9eff;
+}
+
+
+/* Section d'affichage des screenshots */
+.display {
+    margin: 40px 0;
+}
+
+.display-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.display-item {
+    border: 2px solid #333;
+    border-radius: 15px;
+    overflow: visible;
+    background: #2a2a2a;
+    position: relative;
+}
+
+/* Cacher les checkboxes */
+.image-toggle {
+    display: none;
+}
+
+.display-item label {
+    display: block;
+    cursor: pointer;
+}
+
+.display-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+/* Quand la checkbox est cochée (image cliquée) */
+.image-toggle:checked + label img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+    background-color: rgba(26, 26, 26, 0.95);
+    border-radius: 10px;
+    z-index: 1001;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    pointer-events: none; /* Empêche de cliquer sur l'image pour la fermer */
+}
+
+/* Overlay sombre cliquable pour fermer */
+.image-toggle:checked + label::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+/* Alternative : créer un label invisible pour fermer */
+.display-item::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.image-toggle:checked ~ .display-item::after,
+.image-toggle:checked + label + .display-description::before {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.display-description {
+    padding: 20px;
+    text-align: left;
+    background: #2a2a2a;
+    position: relative;
+    z-index: 2;
+}
+
+.display-description h3 {
+    color: #ffffff;
+    font-size: 1.3em;
+    margin: 0 0 10px 0;
+}
+
+.display-description p {
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.footer {
+    margin: 40px 0;
+    padding: 20px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.footer p {
+    color: #cccccc;
+    margin: 5px 0;
+}
+
+.video-section {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.video-section h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.video-section video {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    height: auto;
+}
+
+
+.modele-section {
+    margin: 40px 0;
+}
+
+
+.modele-grid ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+
+.modele-item {
+    border: 2px solid #333;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #2a2a2a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+
+.modele-item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
